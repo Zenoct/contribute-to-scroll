@@ -1,0 +1,26 @@
+document.addEventListener("DOMContentLoaded", function() {
+    var lastScrollTop = 0;
+    var delta = 5;
+    var navbarHeight = document.querySelector('.navbar').offsetHeight;
+
+    window.addEventListener('scroll', function(event){
+        var st = window.pageYOffset || document.documentElement.scrollTop;
+
+        if(Math.abs(lastScrollTop - st) <= delta)
+            return;
+
+        if (st > lastScrollTop && st > navbarHeight){
+            // Cuộn xuống
+            document.querySelector('.navbar').classList.remove('nav-down');
+            document.querySelector('.navbar').classList.add('nav-up');
+        } else {
+            // Cuộn lên
+            if(st + window.innerHeight < document.body.scrollHeight) {
+                document.querySelector('.navbar').classList.remove('nav-up');
+                document.querySelector('.navbar').classList.add('nav-down');
+            }
+        }
+        
+        lastScrollTop = st;
+    }, false);
+});
